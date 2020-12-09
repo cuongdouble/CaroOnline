@@ -32,7 +32,10 @@ namespace CaroOnline.WebApi
 
             services.AddDbContext<CaroOnlineDbContext>(options =>
                 options.UseSqlite("DataSource=CaroOnline.db"), ServiceLifetime.Transient);
-
+            services.AddCors(c =>
+            {
+                c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());
+            });
             services.AddControllers();
             services.AddTransient<IUserAccountService,UserAccountService>();
             services.AddTransient<IAdminAccountService, AdminAccountService>();
@@ -53,7 +56,7 @@ namespace CaroOnline.WebApi
             }
 
             app.UseHttpsRedirection();
-
+            app.UseCors(options => options.AllowAnyOrigin());
             app.UseRouting();
 
             app.UseAuthorization();
