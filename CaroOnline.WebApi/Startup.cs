@@ -34,7 +34,7 @@ namespace CaroOnline.WebApi
                 options.UseSqlite("DataSource=CaroOnline.db"), ServiceLifetime.Transient);
             services.AddCors(c =>
             {
-                c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());
+                c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             });
             services.AddControllers();
             services.AddTransient<IUserAccountService,UserAccountService>();
